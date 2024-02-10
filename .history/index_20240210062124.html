@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hackathon Countdown Timer</title>
+<style>
+    body {
+        background-image: url('Slide 2.png');
+        background-size: cover;
+        background-position: center;
+        font-family: 'Poppins', sans-serif; /* Explicitly set Poppins as the font family */
+        color: white; /* Set default text color to white */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: relative; /* Ensure relative positioning for absolute elements */
+    }
+
+    /* New styles for the countdown element: */
+    #countdown {
+        font-size: 4em; /* Adjusted font size */
+        font-weight: bold;
+        font-family: 'Poppins', sans-serif; /* Explicitly set Poppins as the font family */
+        text-align: center; /* Ensure text is centered horizontally */
+        line-height: 1; /* Avoid vertical gaps between digits */
+        letter-spacing: 0.05em; /* Add slight spacing between digits */
+        position: absolute;
+        top: 50%; /* Horizontally center the countdown vertically */
+        left: 50%; /* Horizontally center the countdown horizontally */
+        transform: translate(-50%, -50%); /* Offset for centering */
+        z-index: 1; /* Ensure the countdown is in front of the background */
+        color: white; /* Set countdown text color to white */
+    }
+
+    /* Progress bar container and styles */
+    #progress-bar-container {
+        width: 50%;
+        height: 20px;
+        background-color: #ddd; /* Adjust background color */
+        border-radius: 5px;
+        margin: 20px auto;
+    }
+
+    #progress-bar {
+        height: 100%;
+        background-color: #4CAF50; /* Adjust progress bar color */
+        border-radius: 5px;
+        transition: width 1s ease-in-out;
+    }
+</style>
+</head>
+<body>
+
+<div id="countdown"></div>
+
+<div id="progress-bar-container">
+    <div id="progress-bar"></div>
+</div>
+
+<script>
+// Function to calculate and display the countdown
+function countdown() {
+    // Hackathon start and end dates (adjust if needed)
+    var hackathonStart = new Date("2024-02-08 20:00:00");
+    var hackathonEnd = new Date("2024-02-10 12:00:00");
+
+    // Get the current date and time
+    var now = new Date().getTime();
+
+    // Calculate the time remaining
+    var distance = hackathonEnd - now;
+
+    // Ensure `distance` is non-negative (for expired hackathon)
+    distance = Math.max(0, distance);
+
+    // Calculate remaining hours and total duration
+    var hoursRemaining = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60 * 60));
+    var totalHours = Math.floor((hackathonEnd - hackathonStart) / (1000 * 60 * 60));
+
+    // Calculate progress bar width percentage
+    var progressWidth = (hoursRemaining / totalHours) * 100;
+
+    // Display the countdown with consistent formatting:
+    document.getElementById("countdown").innerHTML = hoursRemaining + "h ";
+
+    // Update progress bar width
+    document.getElementById("progress-bar").style.width = progressWidth + "%";
+
+    // If the countdown is finished, display a message:
+    if (distance < 0) {
+        clearInterval(interval);
+        document.getElementById("countdown").innerHTML = "Hackathon Ended!";
+        document.getElementById("progress-bar").style.width = "100%";
+    }
+}
+
+// Update the countdown every second
+var interval = setInterval(countdown, 1000);
+
+// Initial call to display

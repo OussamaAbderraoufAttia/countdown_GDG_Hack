@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
+<style>
+    body {
+        background-image: url('Slide 2.png');
+        background-size: cover;
+        background-position: center;
+        font-family: 'Poppins', sans-serif;
+        color: white; /* Set default text color to white */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: relative; /* Ensure relative positioning for absolute elements */
+    }
+
+    /* New styles for the countdown element: */
+    #countdown {
+        font-size: 12em; /* Increased font size */
+        font-weight: bold;
+        font-family: 'Poppins', sans-serif; /* Explicitly set font family */
+        text-align: center; /* Ensure text is centered horizontally */
+        line-height: 1; /* Avoid vertical gaps between digits */
+        letter-spacing: 0.05em; /* Add slight spacing between digits */
+        position: absolute;
+        top: 50%; /* Horizontally center the countdown vertically */
+        left: 50%; /* Horizontally center the countdown horizontally */
+        transform: translate(-50%, -50%); /* Offset for centering */
+        z-index: 1; /* Ensure the countdown is in front of the background */
+        color: white; /* Set countdown text color to white */
+        white-space: nowrap; /* Ensure text remains on one line */
+    }
+</style>
+</head>
+<body>
+
+<div id="countdown"></div>
+
+<script>
+// Function to calculate and display the countdown
+function countdown() {
+    // Set the date to count down to (12:00:00 pm)
+    var countDownDate = new Date();
+    countDownDate.setHours(12);
+    countDownDate.setMinutes(0);
+    countDownDate.setSeconds(0);
+
+    // Get the current date and time
+    var now = new Date().getTime();
+
+    // Calculate the time remaining
+    var distance = countDownDate - now;
+
+    // Ensure `hours` has a minimum value of 0 to avoid an empty hour segment
+    var hours = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the countdown with consistent formatting:
+    document.getElementById("countdown").innerHTML = hours.toString().padStart(2, "0") + "h "
+                                               + minutes.toString().padStart(2, "0") + "m "
+                                               + seconds.toString().padStart(2, "0") + "s ";
+
+    // If the countdown is finished, display a message:
+    if (distance < 0) {
+        clearInterval(interval);
+        document.getElementById("countdown").innerHTML = "EXPIRED";
+    }
+}
+
+// Update the countdown every second
+var interval = setInterval(countdown, 1000);
+
+// Initial call to display the countdown immediately
+countdown();
+</script>
+
+</body>
+</html>

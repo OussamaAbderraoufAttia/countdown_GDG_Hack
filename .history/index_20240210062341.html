@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hackathon Progress</title>
+<style>
+    #progress-bar {
+        width: 100%;
+        height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    #progress {
+        width: 0%;
+        height: 100%;
+        background-color: #4CAF50;
+        transition: width 1s ease-in-out;
+    }
+</style>
+</head>
+<body>
+
+<h1>Hackathon Progress</h1>
+<div id="progress-bar">
+  <div id="progress"></div>
+</div>
+
+<script>
+    // Set the start and end times of the hackathon
+    var hackathonStart = new Date("2024-02-08T20:00:00");
+    var hackathonEnd = new Date("2024-02-10T12:00:00");
+
+    // Calculate the total duration of the hackathon in milliseconds
+    var duration = hackathonEnd - hackathonStart;
+
+    // Function to update the progress bar
+    function updateProgressBar() {
+        // Get the current time
+        var currentTime = new Date();
+
+        // Calculate the elapsed time since the start of the hackathon
+        var elapsedTime = currentTime - hackathonStart;
+
+        // Calculate the progress percentage
+        var progress = (elapsedTime / duration) * 100;
+
+        // Update the progress bar width
+        document.getElementById("progress").style.width = progress + "%";
+    }
+
+    // Update the progress bar initially
+    updateProgressBar();
+
+    // Update the progress bar every second
+    setInterval(updateProgressBar, 1000);
+</script>
+
+</body>
+</html>

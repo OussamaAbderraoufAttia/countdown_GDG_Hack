@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
+<style>
+    body {
+        background-image: url('Slide 2.png');
+        background-size: cover;
+        background-position: center;
+        font-family: 'Poppins', sans-serif;
+        color: white; /* Set default text color to white */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: relative; /* Ensure relative positioning for absolute elements */
+    }
+
+    /* New styles for the countdown element: */
+    #countdown {
+        font-size: 12em; /* Increased font size */
+        font-weight: bold;
+        font-family: 'Poppins', sans-serif; /* Explicitly set font family */
+        text-align: center; /* Ensure text is centered horizontally */
+        line-height: 1; /* Avoid vertical gaps between digits */
+        letter-spacing: 0.05em; /* Add slight spacing between digits */
+        position: absolute;
+        top: 50%; /* Horizontally center the countdown vertically */
+        left: 50%; /* Horizontally center the countdown horizontally */
+        transform: translate(-50%, -50%); /* Offset for centering */
+        z-index: 1; /* Ensure the countdown is in front of the background */
+        color: white; /* Set countdown text color to white */
+        white-space: nowrap; /* Ensure text remains on one line */
+    }
+
+    /* Styles for the progress bar */
+    #progress-bar {
+        width: 80%;
+        height: 30px;
+        border: 1px solid white;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    #progress {
+        height: 100%;
+        background-color: #4CAF50;
+        transition: width 1s ease-in-out;
+    }
+</style>
+</head>
+<body>
+
+<div id="countdown"></div>
+<div id="progress-bar">
+    <div id="progress"></div>
+</div>
+
+<script>
+    // Function to calculate and display the countdown
+    function countdown() {
+        // Set the date to count down to (12:00:00 pm)
+        var countDownDate = new Date();
+        countDownDate.setHours(12);
+        countDownDate

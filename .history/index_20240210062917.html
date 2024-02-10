@@ -20,12 +20,6 @@
     }
 
     /* New styles for the countdown element: */
-    #countdown-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
     #countdown {
         font-size: 12em; /* Increased font size */
         font-weight: bold;
@@ -33,6 +27,11 @@
         text-align: center; /* Ensure text is centered horizontally */
         line-height: 1; /* Avoid vertical gaps between digits */
         letter-spacing: 0.05em; /* Add slight spacing between digits */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1; /* Ensure the countdown is in front of the background */
         color: white; /* Set countdown text color to white */
         white-space: nowrap; /* Ensure text remains on one line */
     }
@@ -48,18 +47,16 @@
 
     #progress {
         height: 100%;
-        background-color: #0d9d58;
+        background-color: #4CAF50;
         transition: width 1s ease-in-out;
     }
 </style>
 </head>
 <body>
 
-<div id="countdown-container">
-    <div id="countdown"></div>
-    <div id="progress-bar">
-        <div id="progress"></div>
-    </div>
+<div id="countdown"></div>
+<div id="progress-bar">
+    <div id="progress"></div>
 </div>
 
 <script>
